@@ -1,0 +1,46 @@
+DIT - Directory Information Tree
+DC  - domain component
+OU  - organisational unit(ou)
+CN  - Common name(cn) 
+DN  - Distinguished Name(dn) 
+
+
+LDAP is a datastore that stores the data in a hierarchical format.For example
+ a user can have multiple attributes related to it such as 
+ 
+ 1. first name
+ 2. last name
+ 3. username
+ 4. email
+ 5. department
+ 6. roles. 
+ 
+ NOw if you want to save these details in to DB, you need multiple tables.Since, LDAP stores the data in a hierarchical format these issues are not common in LDAP. 
+ This hierarchical format is called DIT Directory Information Tree.
+ 
+ Different LDIF(LDAP Data Interchange Format) Attributes
+  --> ldif is the textual representation of LDAP.
+  
+ dc dc(domain component) is the top level or root of the hierarchical data that we save into LDAP. Below is an example of dc definition.
+
+  -->  dc=devglan,dc=com
+  
+  ou - ou stands for organisational unit. For example, ou: finance is an entry inside dc.
+  cn - cn stands for common name. For example, cn: John Doe is an entry inside ou.
+  dn - dn is distinguished name and it uniquely idenntifies a particular entry in LDAP server. 
+  
+  Following is a dn that uniqely identifies the entry of John Doe. To define a dn, start with the cn and navigate back to the top level to dc.
+  -->  cn=John Doe,ou=finance,dc=devglan,dc=com
+  
+  
+  Here o and dc is the attribute where o is the organization.You can only use those attributes which are defined in the objectClass 
+  and hence if you want to use an attribute such as o then u need to define the object class of it.
+  
+  	dn: dc=devglan,dc=com
+	objectclass: dcObject	
+	objectClass: organization
+	o: Devglan
+	dc: devglan
+	
+In the following file, we have 2 users with username/password as john/john and mike/mike. User john has ADMIN role and mike has USER role.(Added under resource)
+	
